@@ -7,24 +7,129 @@ import { DataService } from '../services/data.service';
   standalone: true,
   imports: [],
   template: `
-    <div class="panel">
-      <h1>GIORNI</h1>
-      @if (loading()) {
-        <div>Caricamento dati...</div>
-      }
-      @for (d of availableDays(); track d) {
-        <button class="btn" (click)="go(d)">{{ d }}</button>
-      }
-      <div class="back"><button class="link" (click)="router.navigate(['/'])">← ISTRUTTORI</button></div>
+    <div class="page-container fade-in-up">
+      <div class="page-header">
+        <h1>Giorni Disponibili</h1>
+        <p class="page-description">Orari per <strong>{{ name }}</strong></p>
+      </div>
+
+      <div class="content-card">
+        @if (loading()) {
+          <div class="loading">
+            <div class="spinner"></div>
+            Caricamento dati...
+          </div>
+        } @else {
+          <div class="days-grid">
+            @for (day of availableDays(); track day; let i = $index) {
+              <button
+                class="day-card btn-primary btn-block"
+                (click)="go(day)"
+                [style.animation-delay.ms]="i * 100">
+                <div class="day-content">
+                  <div class="day-icon">📅</div>
+                  <span class="day-name">{{ formatDay(day) }}</span>
+                </div>
+              </button>
+            }
+          </div>
+
+          <div class="back-section">
+            <button class="btn-ghost" (click)="router.navigate(['/'])">
+              ← Torna agli Istruttori
+            </button>
+          </div>
+        }
+      </div>
     </div>
   `,
   styles: [`
-    .panel{ max-width: 480px; margin: 20px auto; text-align: center; }
-    h1{ color:#0d5072; letter-spacing:1px; }
-    .btn{ display:block; width:100%; padding:14px; margin:12px 0; background:#0e567d; color:#fff; border:none; border-radius:8px; font-size:20px; }
-    .btn:hover{ background:#0b4868; cursor:pointer; }
-    .back{ margin-top:8px; }
-    .link{ background:none; border:none; color:#0e567d; font-size:16px; cursor:pointer; }
+    .page-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: var(--space-6);
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .page-description {
+      color: var(--gray-600);
+      font-size: var(--font-size-lg);
+      margin-top: var(--space-2);
+    }
+
+    .page-description strong {
+      color: var(--primary-600);
+      font-weight: 600;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: var(--radius-2xl);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-100);
+    }
+
+    .days-grid {
+      display: grid;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    .day-card {
+      padding: var(--space-5);
+      border-radius: var(--radius-xl);
+      animation: slideInLeft var(--transition-slow) ease-out both;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .day-content {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .day-icon {
+      font-size: var(--font-size-2xl);
+    }
+
+    .day-name {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .back-section {
+      text-align: center;
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    @media (max-width: 768px) {
+      .page-container {
+        padding: var(--space-4);
+      }
+
+      .content-card {
+        padding: var(--space-6);
+      }
+
+      .day-card {
+        padding: var(--space-4);
+        min-height: 70px;
+      }
+
+      .day-name {
+        font-size: var(--font-size-base);
+      }
+    }
   `]
 })
 export class DaysComponent implements OnInit {
@@ -49,5 +154,18 @@ export class DaysComponent implements OnInit {
 
   go(day: string) {
     this.router.navigate(['/instructor', this.name, 'day', day]);
+  }
+
+  formatDay(day: string): string {
+    const dayNames: { [key: string]: string } = {
+      'monday': 'Lunedì',
+      'tuesday': 'Martedì',
+      'wednesday': 'Mercoledì',
+      'thursday': 'Giovedì',
+      'friday': 'Venerdì',
+      'saturday': 'Sabato',
+      'sunday': 'Domenica'
+    };
+    return dayNames[day.toLowerCase()] || day;
   }
 }

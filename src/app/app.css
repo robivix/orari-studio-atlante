@@ -1,0 +1,99 @@
+/* App Component Specific Styles */
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: white;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+}
+
+.logo h2 {
+  background: var(--gradient-hero);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--gray-500);
+  font-weight: 400;
+  margin-top: var(--space-1);
+  display: block;
+}
+
+.header-decoration {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.decoration-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  animation: pulse 2s infinite;
+}
+
+.decoration-dot:nth-child(2) {
+  background: var(--gradient-secondary);
+  animation-delay: 0.3s;
+}
+
+.decoration-dot:nth-child(3) {
+  background: var(--gradient-accent);
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--space-8) 0;
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-50) 100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header-content {
+    padding: var(--space-3) 0;
+  }
+
+  .logo h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .main-content {
+    padding: var(--space-6) 0;
+  }
+}
