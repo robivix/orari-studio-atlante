@@ -41,15 +41,8 @@ export class DataService {
     if (this.dataLoaded) return;
 
     try {
-      // First, discover all CSV files by trying to load known ones and any others
-      const csvFiles = await this.discoverCSVFiles();
-
-      // Load all CSV files and combine the data
-      const allPromises = csvFiles.map(file => this.loadCSVFile(file));
-      const allResults = await Promise.all(allPromises);
-
-      // Combine all data
-      this.allData = allResults.flat();
+      // Load the single consolidated CSV file
+      this.allData = await this.loadScheduleCSV();
 
       // Extract unique instructors, days, and times from the data
       this.extractUniqueValues();
@@ -62,38 +55,18 @@ export class DataService {
     }
   }
 
-  private async discoverCSVFiles(): Promise<string[]> {
-    // Try to load a manifest file or discover files
-    // For now, we'll use a predefined list but this could be made more dynamic
-    const knownFiles = ['ALICE', 'MATILDE', 'SILVIA'];
-    const availableFiles: string[] = [];
-
-    for (const file of knownFiles) {
-      try {
-        const response = await fetch(`/data/${file}.csv`);
-        if (response.ok) {
-          availableFiles.push(file);
-        }
-      } catch (error) {
-        console.warn(`Could not load ${file}.csv:`, error);
-      }
-    }
-
-    return availableFiles;
-  }
-
-  private async loadCSVFile(fileName: string): Promise<ScheduleEntry[]> {
+  private async loadScheduleCSV(): Promise<ScheduleEntry[]> {
     try {
-      const response = await fetch(`/data/${fileName}.csv`);
+      const response = await fetch('/data/schedule.csv');
       if (!response.ok) {
-        throw new Error(`Failed to load ${fileName}.csv`);
+        throw new Error('Failed to load schedule.csv');
       }
 
       const csvText = await response.text();
       return this.parseCSV(csvText);
     } catch (error) {
-      console.error(`Error loading ${fileName}.csv:`, error);
-      return [];
+      console.error('Error loading schedule.csv:', error);
+      throw error;
     }
   }
 
@@ -101,15 +74,15 @@ export class DataService {
     const lines = csvText.trim().split('\n');
     if (lines.length < 2) return []; // No data rows
 
-    // Skip header row and parse data
+    // Skip header row and parse data with new column order: istruttore,giorno,orario,nome,cognome
     return lines.slice(1).map(line => {
       const values = line.split(',');
       return {
         istruttore: values[0]?.trim() || '',
-        nome: values[1]?.trim() || '',
-        cognome: values[2]?.trim() || '',
-        giorno: values[3]?.trim() || '',
-        orario: values[4]?.trim() || ''
+        giorno: values[1]?.trim() || '',
+        orario: values[2]?.trim() || '',
+        nome: values[3]?.trim() || '',
+        cognome: values[4]?.trim() || ''
       };
     }).filter(entry => entry.istruttore && entry.giorno && entry.orario); // Filter out invalid entries
   }
