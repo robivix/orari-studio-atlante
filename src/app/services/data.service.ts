@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export type Participant = { nome: string; cognome: string; presenza: boolean; recupero: boolean };
+export type Participant = { nome: string; cognome: string };
 export type Group = { title: string; participants: Participant[] };
 
 function lsGet<T>(key: string, fallback: T): T {
@@ -62,22 +62,20 @@ export class DataService {
         nome: values[0] || '',
         cognome: values[1] || '',
         giorno: values[2] || '',
-        orario: values[3] || '',
-        presenza: values[4] === 'true',
-        recupero: values[5] === 'true'
+        orario: values[3] || ''
       };
     });
   }
 
   private getFallbackParticipants(): any[] {
     return [
-      { nome: 'ROBERTO', cognome: 'VISSANI', giorno: 'LUNEDÌ', orario: '9:00', presenza: true, recupero: false },
-      { nome: 'LAURA', cognome: 'XXXX', giorno: 'LUNEDÌ', orario: '9:00', presenza: true, recupero: true },
-      { nome: 'MARIA', cognome: 'XXX', giorno: 'LUNEDÌ', orario: '9:00', presenza: false, recupero: true },
-      { nome: 'ANTONIO', cognome: '', giorno: 'MARTEDÌ', orario: '10:00', presenza: true, recupero: false },
-      { nome: 'GIOVANNA', cognome: '', giorno: 'MARTEDÌ', orario: '10:00', presenza: true, recupero: false },
-      { nome: 'MARTA', cognome: 'XXX', giorno: 'MERCOLEDÌ', orario: '16:00', presenza: true, recupero: false },
-      { nome: 'MERY', cognome: 'XXX', giorno: 'MERCOLEDÌ', orario: '16:00', presenza: true, recupero: false }
+      { nome: 'ROBERTO', cognome: 'VISSANI', giorno: 'LUNEDÌ', orario: '9:00' },
+      { nome: 'LAURA', cognome: 'XXXX', giorno: 'LUNEDÌ', orario: '9:00' },
+      { nome: 'MARIA', cognome: 'XXX', giorno: 'LUNEDÌ', orario: '9:00' },
+      { nome: 'ANTONIO', cognome: '', giorno: 'MARTEDÌ', orario: '10:00' },
+      { nome: 'GIOVANNA', cognome: '', giorno: 'MARTEDÌ', orario: '10:00' },
+      { nome: 'MARTA', cognome: 'XXX', giorno: 'MERCOLEDÌ', orario: '16:00' },
+      { nome: 'MERY', cognome: 'XXX', giorno: 'MERCOLEDÌ', orario: '16:00' }
     ];
   }
 
@@ -97,9 +95,7 @@ export class DataService {
       .filter(p => p.giorno === day && p.orario === time)
       .map(p => ({
         nome: p.nome,
-        cognome: p.cognome,
-        presenza: p.presenza,
-        recupero: p.recupero
+        cognome: p.cognome
       }));
 
     return { title, participants: filteredParticipants };

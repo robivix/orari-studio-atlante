@@ -21,7 +21,7 @@ import { NgFor, NgIf } from '@angular/common';
 
       <table class="grid" *ngIf="group()">
         <thead>
-          <tr><th>NOME</th><th>COGNOME</th><th>PRESENZA</th><th>RECUPERO</th></tr>
+          <tr><th>NOME</th><th>COGNOME</th></tr>
         </thead>
         <tbody>
           <tr *ngFor="let p of group()!.participants; let i = index">
@@ -30,12 +30,6 @@ import { NgFor, NgIf } from '@angular/common';
             </td>
             <td>
               <span>{{ p.cognome }}</span>
-            </td>
-            <td class="center">
-              <span class="chip" [class.on]="p.presenza">{{ p.presenza ? 'SI' : 'NO' }}</span>
-            </td>
-            <td class="center">
-              <span class="chip" [class.on]="p.recupero">{{ p.recupero ? 'SI' : 'NO' }}</span>
             </td>
           </tr>
         </tbody>
@@ -91,21 +85,14 @@ export class GroupComponent {
   onEdit(i: number, field: keyof Participant, value: any) {
     const g = structuredClone(this.current());
     if (!g) return;
-    (g.participants[i] as any)[field] = value;
-    this.current.set(g);
-  }
-
-  toggle(i: number, field: 'presenza'|'recupero') {
-    const g = structuredClone(this.current());
-    if (!g) return;
     (g.participants[i] as any)[field] = !g.participants[i][field];
-    this.current.set(g);
+    g.participants.push({ nome:'', cognome:'' });
   }
 
   add() {
     const g = structuredClone(this.current());
     if (!g) return;
-    g.participants.push({ nome:'', cognome:'', presenza:false, recupero:false });
+    g.participants.push({ nome:'', cognome:'' });
     this.current.set(g);
   }
 
