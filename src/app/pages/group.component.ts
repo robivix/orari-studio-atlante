@@ -12,11 +12,6 @@ import { NgFor, NgIf } from '@angular/common';
     <div class="panel">
       <h1>{{ group()?.title || 'Loading...' }}</h1>
 
-      <div class="toolbar">
-        <button class="link" (click)="back()">← TURNI</button>
-        <span class="spacer"></span>
-      </div>
-
       <div *ngIf="!group()">Loading data...</div>
 
       <table class="grid" *ngIf="group()">
@@ -34,6 +29,8 @@ import { NgFor, NgIf } from '@angular/common';
           </tr>
         </tbody>
       </table>
+
+      <div class="back"><button class="link" (click)="back()">← TURNI</button></div>
     </div>
   `,
   styles: [`
@@ -52,6 +49,7 @@ import { NgFor, NgIf } from '@angular/common';
     .chip{ padding:6px 10px; border-radius:16px; border:1px solid #888; background:#f3f6f8; }
     .chip.on{ background:#2f6b2f; color:#fff; border-color:#2f6b2f; }
     .actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:12px; }
+    .back{ margin-top:8px; text-align:center; }
   `]
 })
 export class GroupComponent {
