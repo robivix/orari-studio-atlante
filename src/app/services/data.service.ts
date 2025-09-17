@@ -57,7 +57,7 @@ export class DataService {
 
   private async loadScheduleCSV(): Promise<ScheduleEntry[]> {
     try {
-      const response = await fetch('/data/schedule.csv');
+      const response = await fetch('./data/schedule.csv');
       if (!response.ok) {
         throw new Error('Failed to load schedule.csv');
       }
