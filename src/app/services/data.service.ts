@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 
 export type Participant = { nome: string; cognome: string };
 export type Group = { title: string; participants: Participant[] };
+export type ScheduleEntry = {
+  istruttore: string;
+  nome: string;
+  cognome: string;
+  giorno: string;
+  orario: string;
+};
 
 function lsGet<T>(key: string, fallback: T): T {
   try {
@@ -18,68 +25,132 @@ function lsSet<T>(key: string, value: T) {
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
-  readonly instructors = ['SILVIA','MATILDE','ALICE'];
-  readonly days = ['LUNEDÌ','MARTEDÌ','MERCOLEDÌ','GIOVEDÌ','VENERDÌ'];
-  readonly times = ['8:00','9:00','10:00','11:00','12:00','16:00','17:00','18:00','19:00','20:00'];
+  private allData: ScheduleEntry[] = [];
+  private dataLoaded = false;
 
-  private participantsCache = new Map<string, any[]>();
+  // Dynamic arrays that will be populated from CSV data
+  instructors: string[] = [];
+  days: string[] = [];
+  times: string[] = [];
 
   private key(name: string, day: string, time: string) {
     return `group:${name}:${day}:${time}`;
   }
 
-  private async loadParticipantsFromCSV(instructor: string): Promise<any[]> {
-    // Check cache first
-    if (this.participantsCache.has(instructor)) {
-      return this.participantsCache.get(instructor)!;
-    }
+  async ensureDataLoaded(): Promise<void> {
+    if (this.dataLoaded) return;
 
     try {
-      const response = await fetch(`/data/${instructor}.csv`);
+      // First, discover all CSV files by trying to load known ones and any others
+      const csvFiles = await this.discoverCSVFiles();
+
+      // Load all CSV files and combine the data
+      const allPromises = csvFiles.map(file => this.loadCSVFile(file));
+      const allResults = await Promise.all(allPromises);
+
+      // Combine all data
+      this.allData = allResults.flat();
+
+      // Extract unique instructors, days, and times from the data
+      this.extractUniqueValues();
+
+      this.dataLoaded = true;
+    } catch (error) {
+      console.error('Error loading CSV data:', error);
+      // Use fallback data if loading fails
+      this.useFallbackData();
+    }
+  }
+
+  private async discoverCSVFiles(): Promise<string[]> {
+    // Try to load a manifest file or discover files
+    // For now, we'll use a predefined list but this could be made more dynamic
+    const knownFiles = ['ALICE', 'MATILDE', 'SILVIA'];
+    const availableFiles: string[] = [];
+
+    for (const file of knownFiles) {
+      try {
+        const response = await fetch(`/data/${file}.csv`);
+        if (response.ok) {
+          availableFiles.push(file);
+        }
+      } catch (error) {
+        console.warn(`Could not load ${file}.csv:`, error);
+      }
+    }
+
+    return availableFiles;
+  }
+
+  private async loadCSVFile(fileName: string): Promise<ScheduleEntry[]> {
+    try {
+      const response = await fetch(`/data/${fileName}.csv`);
       if (!response.ok) {
-        throw new Error(`Failed to load CSV for ${instructor}`);
+        throw new Error(`Failed to load ${fileName}.csv`);
       }
 
       const csvText = await response.text();
-      const participants = this.parseCSV(csvText);
-
-      // Cache the results
-      this.participantsCache.set(instructor, participants);
-      return participants;
+      return this.parseCSV(csvText);
     } catch (error) {
-      console.error(`Error loading CSV for ${instructor}:`, error);
-      // Return fallback data if CSV loading fails
-      return this.getFallbackParticipants();
+      console.error(`Error loading ${fileName}.csv:`, error);
+      return [];
     }
   }
 
-  private parseCSV(csvText: string): any[] {
+  private parseCSV(csvText: string): ScheduleEntry[] {
     const lines = csvText.trim().split('\n');
+    if (lines.length < 2) return []; // No data rows
 
+    // Skip header row and parse data
     return lines.slice(1).map(line => {
       const values = line.split(',');
       return {
-        nome: values[0] || '',
-        cognome: values[1] || '',
-        giorno: values[2] || '',
-        orario: values[3] || ''
+        istruttore: values[0]?.trim() || '',
+        nome: values[1]?.trim() || '',
+        cognome: values[2]?.trim() || '',
+        giorno: values[3]?.trim() || '',
+        orario: values[4]?.trim() || ''
       };
+    }).filter(entry => entry.istruttore && entry.giorno && entry.orario); // Filter out invalid entries
+  }
+
+  private extractUniqueValues(): void {
+    // Extract unique instructors
+    this.instructors = [...new Set(this.allData.map(entry => entry.istruttore))].sort();
+
+    // Extract unique days (preserve Italian weekday order)
+    const dayOrder = ['LUNEDÌ', 'MARTEDÌ', 'MERCOLEDÌ', 'GIOVEDÌ', 'VENERDÌ', 'SABATO', 'DOMENICA'];
+    const uniqueDays = new Set(this.allData.map(entry => entry.giorno));
+    this.days = dayOrder.filter(day => uniqueDays.has(day));
+
+    // Extract unique times and sort them
+    const uniqueTimes = new Set(this.allData.map(entry => entry.orario));
+    this.times = Array.from(uniqueTimes).sort((a, b) => {
+      // Convert times to comparable format for sorting
+      const timeA = a.split(':').map(n => parseInt(n));
+      const timeB = b.split(':').map(n => parseInt(n));
+      return (timeA[0] * 60 + timeA[1]) - (timeB[0] * 60 + timeB[1]);
     });
   }
 
-  private getFallbackParticipants(): any[] {
-    return [
-      { nome: 'ROBERTO', cognome: 'VISSANI', giorno: 'LUNEDÌ', orario: '9:00' },
-      { nome: 'LAURA', cognome: 'XXXX', giorno: 'LUNEDÌ', orario: '9:00' },
-      { nome: 'MARIA', cognome: 'XXX', giorno: 'LUNEDÌ', orario: '9:00' },
-      { nome: 'ANTONIO', cognome: '', giorno: 'MARTEDÌ', orario: '10:00' },
-      { nome: 'GIOVANNA', cognome: '', giorno: 'MARTEDÌ', orario: '10:00' },
-      { nome: 'MARTA', cognome: 'XXX', giorno: 'MERCOLEDÌ', orario: '16:00' },
-      { nome: 'MERY', cognome: 'XXX', giorno: 'MERCOLEDÌ', orario: '16:00' }
+  private useFallbackData(): void {
+    // Fallback to original hardcoded data if CSV loading fails
+    this.instructors = ['SILVIA', 'MATILDE', 'ALICE'];
+    this.days = ['LUNEDÌ', 'MARTEDÌ', 'MERCOLEDÌ', 'GIOVEDÌ', 'VENERDÌ'];
+    this.times = ['8:00', '9:00', '10:00', '11:00', '12:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
+
+    // Create some fallback data
+    this.allData = [
+      { istruttore: 'SILVIA', nome: 'ROBERTO', cognome: 'VISSANI', giorno: 'LUNEDÌ', orario: '9:00' },
+      { istruttore: 'SILVIA', nome: 'LAURA', cognome: 'XXXX', giorno: 'LUNEDÌ', orario: '9:00' }
     ];
+
+    this.dataLoaded = true;
   }
 
   async getGroup(name: string, day: string, time: string): Promise<Group> {
+    await this.ensureDataLoaded();
+
     const title = `GRUPPO ${name} ${day} ${time}`;
     const key = this.key(name, day, time);
 
@@ -89,13 +160,16 @@ export class DataService {
       return stored;
     }
 
-    // If not in localStorage, load from CSV and filter by day and time
-    const allParticipants = await this.loadParticipantsFromCSV(name);
-    const filteredParticipants = allParticipants
-      .filter(p => p.giorno === day && p.orario === time)
-      .map(p => ({
-        nome: p.nome,
-        cognome: p.cognome
+    // Filter data by instructor, day, and time
+    const filteredParticipants = this.allData
+      .filter(entry =>
+        entry.istruttore === name &&
+        entry.giorno === day &&
+        entry.orario === time
+      )
+      .map(entry => ({
+        nome: entry.nome,
+        cognome: entry.cognome
       }));
 
     return { title, participants: filteredParticipants };
@@ -103,5 +177,36 @@ export class DataService {
 
   saveGroup(name: string, day: string, time: string, group: Group) {
     lsSet(this.key(name, day, time), group);
+  }
+
+  // Method to get available days for a specific instructor
+  async getDaysForInstructor(instructor: string): Promise<string[]> {
+    await this.ensureDataLoaded();
+
+    const instructorDays = new Set(
+      this.allData
+        .filter(entry => entry.istruttore === instructor)
+        .map(entry => entry.giorno)
+    );
+
+    // Return days in the correct order
+    return this.days.filter(day => instructorDays.has(day));
+  }
+
+  // Method to get available times for a specific instructor and day
+  async getTimesForInstructorAndDay(instructor: string, day: string): Promise<string[]> {
+    await this.ensureDataLoaded();
+
+    const availableTimes = new Set(
+      this.allData
+        .filter(entry =>
+          entry.istruttore === instructor &&
+          entry.giorno === day
+        )
+        .map(entry => entry.orario)
+    );
+
+    // Return times in the correct order
+    return this.times.filter(time => availableTimes.has(time));
   }
 }

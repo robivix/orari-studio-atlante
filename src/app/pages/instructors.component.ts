@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
@@ -10,7 +10,8 @@ import { DataService } from '../services/data.service';
   template: `
     <div class="panel">
       <h1>ISTRUTTORI</h1>
-      <button class="btn" *ngFor="let i of ds.instructors" (click)="go(i)">{{ i }}</button>
+      <div *ngIf="loading()">Caricamento dati...</div>
+      <button class="btn" *ngFor="let i of instructors()" (click)="go(i)">{{ i }}</button>
     </div>
   `,
   styles: [`
@@ -20,9 +21,24 @@ import { DataService } from '../services/data.service';
     .btn:hover{ background:#0b4868; cursor:pointer; }
   `]
 })
-export class InstructorsComponent {
+export class InstructorsComponent implements OnInit {
   ds = inject(DataService);
   router = inject(Router);
+
+  loading = signal(true);
+  instructors = signal<string[]>([]);
+
+  async ngOnInit() {
+    try {
+      await this.ds.ensureDataLoaded();
+      this.instructors.set(this.ds.instructors);
+    } catch (error) {
+      console.error('Error loading instructors:', error);
+    } finally {
+      this.loading.set(false);
+    }
+  }
+
   go(name: string) {
     this.router.navigate(['/instructor', name]);
   }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
@@ -10,7 +10,8 @@ import { DataService } from '../services/data.service';
   template: `
     <div class="panel">
       <h1>GIORNI</h1>
-      <button class="btn" *ngFor="let d of ds.days" (click)="go(d)">{{ d }}</button>
+      <div *ngIf="loading()">Caricamento dati...</div>
+      <button class="btn" *ngFor="let d of availableDays()" (click)="go(d)">{{ d }}</button>
       <div class="back"><button class="link" (click)="router.navigate(['/'])">← ISTRUTTORI</button></div>
     </div>
   `,
@@ -23,11 +24,26 @@ import { DataService } from '../services/data.service';
     .link{ background:none; border:none; color:#0e567d; font-size:16px; cursor:pointer; }
   `]
 })
-export class DaysComponent {
+export class DaysComponent implements OnInit {
   ds = inject(DataService);
   router = inject(Router);
   ar = inject(ActivatedRoute);
+
   name = this.ar.snapshot.paramMap.get('name')!;
+  loading = signal(true);
+  availableDays = signal<string[]>([]);
+
+  async ngOnInit() {
+    try {
+      const days = await this.ds.getDaysForInstructor(this.name);
+      this.availableDays.set(days);
+    } catch (error) {
+      console.error('Error loading days:', error);
+    } finally {
+      this.loading.set(false);
+    }
+  }
+
   go(day: string) {
     this.router.navigate(['/instructor', this.name, 'day', day]);
   }
