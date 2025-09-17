@@ -15,7 +15,7 @@ import { RouterOutlet } from '@angular/router';
       <h2>Studio Atlante - Orari</h2>
     </header>
     <main>
-      <img src="/logo.png" alt="Studio Atlante Logo" class="home-logo">
+      <img src="logo.png" alt="Studio Atlante Logo" class="home-logo">
       <router-outlet></router-outlet>
     </main>
   `
