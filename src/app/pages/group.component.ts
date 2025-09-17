@@ -2,33 +2,38 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { DataService, Group, Participant } from '../services/data.service';
-import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-group',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [],
   template: `
     <div class="panel">
       <h1>{{ group()?.title || 'Loading...' }}</h1>
 
-      <div *ngIf="!group()">Loading data...</div>
+      @if (!group()) {
+        <div>Loading data...</div>
+      }
 
-      <table class="grid" *ngIf="group()">
-        <thead>
-          <tr><th>NOME</th><th>COGNOME</th></tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let p of group()!.participants; let i = index">
-            <td>
-              <span>{{ p.nome }}</span>
-            </td>
-            <td>
-              <span>{{ p.cognome }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      @if (group()) {
+        <table class="grid">
+          <thead>
+            <tr><th>NOME</th><th>COGNOME</th></tr>
+          </thead>
+          <tbody>
+            @for (p of group()!.participants; track $index) {
+              <tr>
+                <td>
+                  <span>{{ p.nome }}</span>
+                </td>
+                <td>
+                  <span>{{ p.cognome }}</span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
 
       <div class="back"><button class="link" (click)="back()">← TURNI</button></div>
     </div>

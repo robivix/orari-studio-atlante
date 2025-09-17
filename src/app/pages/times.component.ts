@@ -1,17 +1,20 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-times',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="panel">
       <h1>TURNI</h1>
-      <div *ngIf="loading()">Caricamento dati...</div>
-      <button class="btn time" *ngFor="let t of availableTimes()" (click)="go(t)">{{ t }}</button>
+      @if (loading()) {
+        <div>Caricamento dati...</div>
+      }
+      @for (t of availableTimes(); track t) {
+        <button class="btn time" (click)="go(t)">{{ t }}</button>
+      }
       <div class="back"><button class="link" (click)="router.navigate(['/instructor', name])">← GIORNI</button></div>
     </div>
   `,

@@ -1,17 +1,20 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-days',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="panel">
       <h1>GIORNI</h1>
-      <div *ngIf="loading()">Caricamento dati...</div>
-      <button class="btn" *ngFor="let d of availableDays()" (click)="go(d)">{{ d }}</button>
+      @if (loading()) {
+        <div>Caricamento dati...</div>
+      }
+      @for (d of availableDays(); track d) {
+        <button class="btn" (click)="go(d)">{{ d }}</button>
+      }
       <div class="back"><button class="link" (click)="router.navigate(['/'])">← ISTRUTTORI</button></div>
     </div>
   `,

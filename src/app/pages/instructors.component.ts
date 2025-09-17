@@ -1,17 +1,20 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-instructors',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="panel">
       <h1>ISTRUTTORI</h1>
-      <div *ngIf="loading()">Caricamento dati...</div>
-      <button class="btn" *ngFor="let i of instructors()" (click)="go(i)">{{ i }}</button>
+      @if (loading()) {
+        <div>Caricamento dati...</div>
+      }
+      @for (i of instructors(); track i) {
+        <button class="btn" (click)="go(i)">{{ i }}</button>
+      }
     </div>
   `,
   styles: [`
