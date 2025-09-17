@@ -1,0 +1,12 @@
+nome,cognome,giorno,orario,presenza,recupero
+MARCO,ROSSI,LUNEDÌ,8:00,true,false
+GIULIA,BIANCHI,LUNEDÌ,8:00,false,false
+FEDERICO,VERDI,LUNEDÌ,8:00,true,true
+ALESSANDRA,NERI,MARTEDÌ,11:00,true,false
+DAVIDE,FERRARI,MARTEDÌ,11:00,false,true
+CHIARA,GRECO,MERCOLEDÌ,17:00,true,false
+STEFANO,ROMANO,MERCOLEDÌ,17:00,true,false
+CARMEN,LOPEZ,GIOVEDÌ,19:00,true,false
+MATTEO,COSTA,GIOVEDÌ,19:00,false,false
+ELENA,FONTANA,VENERDÌ,20:00,true,true
+

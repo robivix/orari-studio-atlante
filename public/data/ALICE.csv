@@ -1,0 +1,12 @@
+nome,cognome,giorno,orario,presenza,recupero
+FRANCESCA,CONTI,LUNEDÌ,12:00,true,false
+ANDREA,RICCI,LUNEDÌ,12:00,true,true
+VALENTINA,MARINO,LUNEDÌ,12:00,false,false
+LUCA,GALLO,MARTEDÌ,16:00,true,false
+ELENA,COSTA,MARTEDÌ,16:00,true,true
+SIMONE,GIORDANO,MERCOLEDÌ,18:00,false,true
+PAOLA,MANCINI,MERCOLEDÌ,18:00,true,false
+GIACOMO,PELLEGRINI,GIOVEDÌ,8:00,true,false
+SILVIA,MORETTI,GIOVEDÌ,8:00,true,true
+FABIO,BARBIERI,VENERDÌ,19:00,false,false
+
