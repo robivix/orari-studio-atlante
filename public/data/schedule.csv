@@ -13,10 +13,10 @@ ALICE,LUNEDÌ,11:00,Gabriela,Lenti
 ALICE,LUNEDÌ,11:00,Silvana,Francescangeli
 ALICE,LUNEDÌ,11:00,Roberto,Gioacchini
 ALICE,LUNEDÌ,14:30,Alberto,Di Franco
-ALICE,LUNEDÌ,14:30,Ambra,???
-ALICE,LUNEDÌ,14:30,Francesca ,Caputo
-ALICE,LUNEDÌ,14:30,Francesco,fasciotti 
-ALICE,LUNEDÌ,14:30,Valentina,Magnini 
+ALICE,LUNEDÌ,14:30,Ambra,????
+ALICE,LUNEDÌ,14:30,Francesca,Caputo
+ALICE,LUNEDÌ,14:30,Francesco,Fasciotti
+ALICE,LUNEDÌ,14:30,Valentina,Magnini
 ALICE,MARTEDÌ,09:00,Carla,Amoni
 ALICE,MARTEDÌ,09:00,Daniela,Orlando
 ALICE,MARTEDÌ,09:00,Daniela,Perlini
@@ -48,15 +48,15 @@ ALICE,MARTEDÌ,12:00,Serafina,Riz
 ALICE,MARTEDÌ,12:00,Sonia,Presta
 ALICE,MARTEDÌ,18:30,Giorgia,Fanesi
 ALICE,MARTEDÌ,18:30,Paola,Palumbo
-ALICE,MARTEDÌ,18:30,Roberta,???
-ALICE,MARTEDÌ,18:30,Sara,Elide
+ALICE,MARTEDÌ,18:30,Roberta,????
+ALICE,MARTEDÌ,18:30,Sara,Eldib
 ALICE,MARTEDÌ,18:30,Silvia,Marandola
 ALICE,MARTEDÌ,18:30,Valeria,Giuffrini
 ALICE,MARTEDÌ,18:30,Veronica,Falini
 ALICE,MARTEDÌ,19:30,Simona,Cristofanelli
 ALICE,MARTEDÌ,19:30,Simona,Coppari
-ALICE,MARTEDÌ,19:30,katiuscia,Panichelli
-ALICE,MARTEDÌ,19:30,Monia,Mordi
+ALICE,MARTEDÌ,19:30,Katiuscia,Panichelli
+ALICE,MARTEDÌ,19:30,Monia,Bordi
 ALICE,MARTEDÌ,19:30,Giorgia,Severi
 ALICE,MARTEDÌ,19:30,Silvia,Pisano
 ALICE,MARTEDÌ,19:30,????,De Santis
@@ -67,13 +67,13 @@ ALICE,MERCOLEDÌ,09:00,Patrizia,Francolini
 ALICE,MERCOLEDÌ,10:00,Lidia,Marinelli
 ALICE,MERCOLEDÌ,10:00,Monica,Acerbo
 ALICE,MERCOLEDÌ,10:00,Rosalba,Barchiesi
-ALICE,MERCOLEDÌ,10:00,Virginia,Pascucci
 ALICE,MERCOLEDÌ,10:00,Rosaria,Paolinelli
-ALICE,MERCOLEDÌ,10:00,patrizia,Giorgini
+ALICE,MERCOLEDÌ,10:00,Patrizia,Giorgini
+ALICE,MERCOLEDÌ,10:00,Virginia,Pascucci
 ALICE,MERCOLEDÌ,11:00,Anita,Ascenzo
 ALICE,MERCOLEDÌ,11:00,Gabriela,Lenti
-ALICE,MERCOLEDÌ,11:00,Silvana,Francescangeli
 ALICE,MERCOLEDÌ,11:00,????,Paolinelli
+ALICE,MERCOLEDÌ,11:00,Silvana,Francescangeli
 ALICE,GIOVEDÌ,09:00,Carla,Amoni
 ALICE,GIOVEDÌ,09:00,Daniela,Orlando
 ALICE,GIOVEDÌ,09:00,Daniela,Perlini
@@ -82,7 +82,7 @@ ALICE,GIOVEDÌ,09:00,Grazia,Cauchi
 ALICE,GIOVEDÌ,09:00,Ketty,Legnani
 ALICE,GIOVEDÌ,09:00,Maria Assunta,Cerioni
 ALICE,GIOVEDÌ,09:00,Paola,Pirani
-ALICE,GIOVEDÌ,09:00,Paola,???
+ALICE,GIOVEDÌ,09:00,Paola,????
 ALICE,GIOVEDÌ,09:00,Rosa,Carrari
 ALICE,GIOVEDÌ,10:00,Alberta,Paolini
 ALICE,GIOVEDÌ,10:00,Amedea,????
@@ -103,9 +103,9 @@ ALICE,GIOVEDÌ,12:00,Paolo,Lusuardi
 ALICE,GIOVEDÌ,12:00,Rodolfo,Ferretti
 ALICE,GIOVEDÌ,12:00,Serafina,Riz
 ALICE,GIOVEDÌ,12:00,Sonia,Presta
-ALICE,GIOVEDÌ,14:30,Alberto,Fi Franco
+ALICE,GIOVEDÌ,14:30,Alberto,Di Franco
 ALICE,GIOVEDÌ,14:30,Francesco,Sfasciotti
-ALICE,GIOVEDÌ,14:30,Ambra,???
+ALICE,GIOVEDÌ,14:30,Ambra,????
 ALICE,GIOVEDÌ,14:30,Francesca,Capuzzo
 ALICE,VENERDÌ,08:00,Alberto,Licciardi
 ALICE,VENERDÌ,08:00,Carmen,Paterniani
@@ -126,7 +126,7 @@ ALICE,VENERDÌ,10:00,Daniela,Orlando
 ALICE,VENERDÌ,10:00,????,Paolinelli
 ALICE,VENERDÌ,10:00,Patrizia,Giorgini
 ALICE,VENERDÌ,10:00,Cinzia,Venturi
-ALICE,VENERDÌ,10:00,Gabriella,???
+ALICE,VENERDÌ,10:00,Gabriella,????
 ALICE,VENERDÌ,18:00,Debora,Rossetti
 ALICE,VENERDÌ,18:00,Lucilla,Luccioni
 ALICE,VENERDÌ,18:00,Manuela,Macchia
@@ -176,7 +176,7 @@ SILVIA,GIOVEDÌ,18:30,Sara,Palumbo
 SILVIA,GIOVEDÌ,18:30,Silvia,Marandola
 SILVIA,GIOVEDÌ,18:30,Valeria,Giuffrini
 SILVIA,GIOVEDÌ,18:30,Veronica,Falini
-MATILDE,LUNEDÌ,16:00,UNI3,UNI3
+MATILDE,LUNEDÌ,16:00,Uni3,Uni3
 MATILDE,LUNEDÌ,17:00,Antonella,Luccioni
 MATILDE,LUNEDÌ,17:00,Paola,Sarti
 MATILDE,LUNEDÌ,17:00,Eleonora,Lattanzi
@@ -194,12 +194,12 @@ MATILDE,LUNEDÌ,19:00,Manuela,Macchia
 MATILDE,LUNEDÌ,19:00,Sara,Canulli
 MATILDE,LUNEDÌ,19:00,Silvia,Gatto
 MATILDE,LUNEDÌ,19:00,Maria Vittoria,Piccinini
-MATILDE,LUNEDÌ,19:00,Veronica,???
+MATILDE,LUNEDÌ,19:00,Veronica,????
 MATILDE,MERCOLEDÌ,17:00,Antonella,Luccioni
 MATILDE,MERCOLEDÌ,17:00,Paola,Sarti
 MATILDE,MERCOLEDÌ,17:00,Eleonora,Lattanzi
-MATILDE,MERCOLEDÌ,??:??,Carla,Palestro
-MATILDE,MERCOLEDÌ,??:??,Catia,Palestro
+MATILDE,MERCOLEDÌ,????,Carla,Palestro
+MATILDE,MERCOLEDÌ,????,Catia,Palestro
 MATILDE,MERCOLEDÌ,18:00,Rossella,Pelosi
 MATILDE,MERCOLEDÌ,18:00,Teresa,Sorgenti
 MATILDE,MERCOLEDÌ,18:00,Sonia,Ciattaglia
@@ -213,7 +213,7 @@ MATILDE,MERCOLEDÌ,19:00,Manuela,Macchia
 MATILDE,MERCOLEDÌ,19:00,Sara,Canulli
 MATILDE,MERCOLEDÌ,19:00,Silvia,Gatto
 MATILDE,MERCOLEDÌ,19:00,Maria Vittoria,Piccinini
-MATILDE,MERCOLEDÌ,19:00,Veronica,???
+MATILDE,MERCOLEDÌ,19:00,Veronica,????
 MATILDE,GIOVEDÌ,15:30,Antonella,Lanci
 MATILDE,GIOVEDÌ,15:30,Maurizio,Marietti
 MATILDE,GIOVEDÌ,15:30,Irene,Sacco
@@ -222,7 +222,7 @@ MATILDE,GIOVEDÌ,16:30,Alessandra,Concettoni
 MATILDE,GIOVEDÌ,16:30,Cinzia,Casalini
 MATILDE,GIOVEDÌ,16:30,Michela,Sabbatini
 MATILDE,GIOVEDÌ,16:30,Tiziana,Antomacchio
-MATILDE,GIOVEDÌ,16:30,Tania,???
+MATILDE,GIOVEDÌ,16:30,Tania,????
 MATILDE,GIOVEDÌ,16:30,Federica,Vichi
-MATILDE,GIOVEDÌ,??:??,Carla,Palestro
-MATILDE,GIOVEDÌ,??:??,Catia,Palestro
+MATILDE,GIOVEDÌ,????,Carla,Palestro
+MATILDE,GIOVEDÌ,????,Catia,Palestro
