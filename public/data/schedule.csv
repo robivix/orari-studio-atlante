@@ -72,7 +72,7 @@ ALICE,MARTEDÌ,10:00,Liliana,Zoppini
 ALICE,MARTEDÌ,10:00,Ofelia,?
 ALICE,MARTEDÌ,11:00,Daniela,Valloscuro
 ALICE,MARTEDÌ,11:00,Danila,Capulli
-ALICE,MARTEDÌ,11:00,Manuela,Catena
+ALICE,MARTEDÌ,11:00,Emanuela,Catena
 ALICE,MARTEDÌ,11:00,Mariella,Montemari
 ALICE,MARTEDÌ,11:00,Paola,Paolinelli
 ALICE,MARTEDÌ,11:00,Stefania,Busilacchi
@@ -90,6 +90,9 @@ SILVIA,MARTEDÌ,16:30,Michela,Sabbatini
 SILVIA,MARTEDÌ,16:30,Stefania,Solazzi
 SILVIA,MARTEDÌ,16:30,Tania,????
 SILVIA,MARTEDÌ,16:30,Tiziana,Antonacchio
+SILVIA,MARTEDÌ,16:30,Federica,Vichi
+SILVIA,MARTEDÌ,16:30,Cinzia,Casalini
+SILVIA,MARTEDÌ,16:30,Tania,Yankovska
 SILVIA,MARTEDÌ,16:30,Carla,Palestro
 SILVIA,MARTEDÌ,16:30,Catia,Palestro
 SILVIA,MARTEDÌ,17:30,Sabrina,Gianbenedetti
@@ -185,7 +188,7 @@ ALICE,GIOVEDÌ,10:00,Liliana,Zoppini
 ALICE,GIOVEDÌ,10:00,Ofelia,?
 ALICE,GIOVEDÌ,11:00,Daniela,Valloscuro
 ALICE,GIOVEDÌ,11:00,Danila,Capulli
-ALICE,GIOVEDÌ,11:00,Manuela,Catena
+ALICE,GIOVEDÌ,11:00,Emanuela,Catena
 ALICE,GIOVEDÌ,11:00,Mariella,Montemari
 ALICE,GIOVEDÌ,11:00,Paola,Paolinelli
 ALICE,GIOVEDÌ,11:00,Stefania,Busilacchi
@@ -208,11 +211,17 @@ MATILDE,GIOVEDÌ,15:30,Maurizio,Marietti
 MATILDE,GIOVEDÌ,15:30,Irene,Sacco
 MATILDE,GIOVEDÌ,15:30,Mariella,Paoletti
 MATILDE,GIOVEDÌ,15:30,Libera,D'erruco
-MATILDE,GIOVEDÌ,15:30,Tiziana,????
+MATILDE,GIOVEDÌ,15:30,Alessia,Belardinelli
+MATILDE,GIOVEDÌ,15:30,Libera,D'errico
+MATILDE,GIOVEDÌ,15:30,Claudia,Baldoni
+MATILDE,GIOVEDÌ,15:30,Tiziana,Brunelli
 MATILDE,GIOVEDÌ,16:30,Alessandra,Concettoni
 MATILDE,GIOVEDÌ,16:30,Michela,Sabbatini
 MATILDE,GIOVEDÌ,16:30,Stefania,Solazzi
 MATILDE,GIOVEDÌ,16:30,Tania,????
+MATILDE,GIOVEDÌ,16:30,Cinzia,Casalini
+MATILDE,GIOVEDÌ,16:30,Federica,Vichi
+MATILDE,GIOVEDÌ,16:30,Tania,Yankovska
 MATILDE,GIOVEDÌ,16:30,Tiziana,Antonacchio
 MATILDE,GIOVEDÌ,16:30,Carla,Palestro
 MATILDE,GIOVEDÌ,16:30,Catia,Palestro
@@ -245,8 +254,8 @@ ALICE,VENERDÌ,08:00,Fabio,Andreoni
 ALICE,VENERDÌ,08:00,Leondina,Bravi
 ALICE,VENERDÌ,08:00,Loretta,Solazzi
 ALICE,VENERDÌ,08:00,Mariella,Balestra
-ALICE,VENERDÌ,08:00,Roby,Vix
 ALICE,VENERDÌ,08:00,Vilma,Bontempo
+ALICE,VENERDÌ,08:00,Roby,Vix
 ALICE,VENERDÌ,09:00,Carla,Amoni
 ALICE,VENERDÌ,09:00,Moscoloni,Antonietta
 ALICE,VENERDÌ,09:00,Pacenti,Graziella
@@ -266,6 +275,7 @@ ALICE,VENERDÌ,18:00,Debora,Rossetti
 ALICE,VENERDÌ,18:00,Lucilla,Luccioni
 ALICE,VENERDÌ,18:00,Catia,Palestro
 ALICE,VENERDÌ,18:00,Carla,Palestro
+ALICE,VENERDÌ,18:00,Paolo,Quartucci
 ALICE,VENERDÌ,18:00,Manuela,Macchia
 ALICE,VENERDÌ,18:00,Paolo,Quartucci
 ALICE,VENERDÌ,19:00,Katiuscia,Panichelli
